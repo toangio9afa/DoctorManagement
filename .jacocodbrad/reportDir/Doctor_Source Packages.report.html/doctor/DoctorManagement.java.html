@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorManagement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo analysis: &quot;Doctor: Source Packages&quot; (uses JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">doctor</a> &gt; <span class="el_source">DoctorManagement.java</span></div><h1>DoctorManagement.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package doctor;
+
+/**
+ *
+ * @author Admin
+ */
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+<span class="fc" id="L17">public class DoctorManagement {</span>
+<span class="fc" id="L18">    private ArrayList&lt;Doctor&gt; doctors = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L19">    private int currentId = 1;</span>
+
+    public void addDoctor() {
+<span class="fc" id="L22">        Scanner sc = new Scanner(System.in);</span>
+<span class="fc" id="L23">        System.out.println(&quot;Nhập tên bác sĩ:&quot;);</span>
+<span class="nc" id="L24">        String name = sc.nextLine();</span>
+<span class="nc" id="L25">        System.out.println(&quot;Nhập ngày sinh (dd/MM/yyyy):&quot;);</span>
+<span class="nc" id="L26">        String dateOfBirth = sc.nextLine();</span>
+<span class="nc" id="L27">        System.out.println(&quot;Nhập chuyên khoa:&quot;);</span>
+<span class="nc" id="L28">        String specialization = sc.nextLine();</span>
+<span class="nc" id="L29">        System.out.println(&quot;Nhập trạng thái (0: nghỉ phép, 1: sẵn sàng, 2: bận, 3: đang chẩn đoán):&quot;);</span>
+<span class="nc" id="L30">        int availability = Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L31">        System.out.println(&quot;Nhập email:&quot;);</span>
+<span class="nc" id="L32">        String email = sc.nextLine();</span>
+<span class="nc" id="L33">        System.out.println(&quot;Nhập số điện thoại (định dạng (000)-000-0000):&quot;);</span>
+<span class="nc" id="L34">        String mobile = sc.nextLine();</span>
+
+        try {
+<span class="nc" id="L37">            Doctor doctor = new Doctor(currentId++, name, dateOfBirth, specialization, availability, email, mobile);</span>
+<span class="nc" id="L38">            doctors.add(doctor);</span>
+<span class="nc" id="L39">            System.out.println(&quot;Thêm bác sĩ thành công!&quot;);</span>
+<span class="nc" id="L40">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L41">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L42">        }</span>
+<span class="nc" id="L43">    }</span>
+
+    public void editDoctor(int id) {
+<span class="fc" id="L46">        Doctor doctor = findDoctorById(id);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (doctor == null) {</span>
+<span class="fc" id="L48">            System.out.println(&quot;Không tìm thấy bác sĩ.&quot;);</span>
+<span class="fc" id="L49">            return;</span>
+        }
+
+<span class="nc" id="L52">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L53">        System.out.println(&quot;Nhập tên mới (để trống để giữ nguyên):&quot;);</span>
+<span class="nc" id="L54">        String name = sc.nextLine();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!name.isEmpty()) doctor.setName(name);</span>
+
+<span class="nc" id="L57">        System.out.println(&quot;Nhập ngày sinh mới (dd/MM/yyyy) (để trống để giữ nguyên):&quot;);</span>
+<span class="nc" id="L58">        String dob = sc.nextLine();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!dob.isEmpty()) doctor.setDateOfBirth(dob);</span>
+
+<span class="nc" id="L61">        System.out.println(&quot;Nhập chuyên khoa mới (để trống để giữ nguyên):&quot;);</span>
+<span class="nc" id="L62">        String specialization = sc.nextLine();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (!specialization.isEmpty()) doctor.setSpecialization(specialization);</span>
+
+<span class="nc" id="L65">        System.out.println(&quot;Nhập trạng thái mới (0, 1, 2, 3):&quot;);</span>
+<span class="nc" id="L66">        int availability = Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L67">        doctor.setAvailability(availability);</span>
+
+<span class="nc" id="L69">        System.out.println(&quot;Nhập email mới (để trống để giữ nguyên):&quot;);</span>
+<span class="nc" id="L70">        String email = sc.nextLine();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (!email.isEmpty()) doctor.setEmail(email);</span>
+
+<span class="nc" id="L73">        System.out.println(&quot;Nhập số điện thoại mới (để trống để giữ nguyên):&quot;);</span>
+<span class="nc" id="L74">        String mobile = sc.nextLine();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!mobile.isEmpty()) doctor.setMobile(mobile);</span>
+
+<span class="nc" id="L77">        System.out.println(&quot;Cập nhật thông tin thành công!&quot;);</span>
+<span class="nc" id="L78">    }</span>
+
+    public void deleteDoctor(int id) {
+<span class="fc" id="L81">        Doctor doctor = findDoctorById(id);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (doctor != null) {</span>
+<span class="nc" id="L83">            doctors.remove(doctor);</span>
+<span class="nc" id="L84">            System.out.println(&quot;Xóa bác sĩ thành công!&quot;);</span>
+        } else {
+<span class="fc" id="L86">            System.out.println(&quot;Không tìm thấy bác sĩ.&quot;);</span>
+        }
+<span class="fc" id="L88">    }</span>
+
+    public Doctor findDoctorById(int id) {
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        for (Doctor doctor : doctors) {</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (doctor.getId() == id) {</span>
+<span class="nc" id="L93">                return doctor;</span>
+            }
+<span class="nc" id="L95">        }</span>
+<span class="fc" id="L96">        return null;</span>
+    }
+
+    public void searchDoctorByName(String name) {
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        for (Doctor doctor : doctors) {</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (doctor.getName().equalsIgnoreCase(name)) {</span>
+<span class="nc" id="L102">                System.out.println(doctor);</span>
+<span class="nc" id="L103">                return;</span>
+            }
+<span class="nc" id="L105">        }</span>
+<span class="fc" id="L106">        System.out.println(&quot;Không tìm thấy bác sĩ.&quot;);</span>
+<span class="fc" id="L107">    }</span>
+
+    public void sortDoctorsByDateOfBirth() {
+<span class="fc" id="L110">        Collections.sort(doctors, new Comparator&lt;Doctor&gt;() {</span>
+            public int compare(Doctor d1, Doctor d2) {
+<span class="nc" id="L112">                return d1.getDateOfBirth().compareTo(d2.getDateOfBirth());</span>
+            }
+        });
+<span class="fc" id="L115">        System.out.println(&quot;Danh sách bác sĩ đã được sắp xếp theo ngày sinh.&quot;);</span>
+<span class="fc" id="L116">    }</span>
+
+    public void displayDoctors() {
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        for (Doctor doctor : doctors) {</span>
+<span class="nc" id="L120">            System.out.println(doctor);</span>
+<span class="nc" id="L121">        }</span>
+<span class="fc" id="L122">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

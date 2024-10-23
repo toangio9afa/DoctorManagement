@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Doctor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo analysis: &quot;Doctor: Source Packages&quot; (uses JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">doctor</a> &gt; <span class="el_source">Doctor.java</span></div><h1>Doctor.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package doctor;
+
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author Admin
+ */
+public class Doctor {
+    private int id;
+    private String name;
+    private String dateOfBirth;
+    private String specialization;
+    private int availability;
+    private String email;
+    private String mobile;
+
+<span class="nc" id="L23">    public Doctor(int id, String name, String dateOfBirth, String specialization, int availability, String email, String mobile) {</span>
+<span class="nc" id="L24">        this.id = id;</span>
+<span class="nc" id="L25">        this.name = name;</span>
+<span class="nc" id="L26">        this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L27">        this.specialization = specialization;</span>
+<span class="nc" id="L28">        this.availability = availability;</span>
+<span class="nc" id="L29">        setEmail(email);</span>
+<span class="nc" id="L30">        setMobile(mobile);</span>
+<span class="nc" id="L31">    }</span>
+
+    // Getters và Setters
+<span class="nc" id="L34">    public int getId() { return id; }</span>
+<span class="nc" id="L35">    public String getName() { return name; }</span>
+<span class="nc" id="L36">    public void setName(String name) { this.name = name; }</span>
+
+<span class="nc" id="L38">    public String getDateOfBirth() { return dateOfBirth; }</span>
+<span class="nc" id="L39">    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }</span>
+
+<span class="nc" id="L41">    public String getSpecialization() { return specialization; }</span>
+<span class="nc" id="L42">    public void setSpecialization(String specialization) { this.specialization = specialization; }</span>
+
+<span class="nc" id="L44">    public int getAvailability() { return availability; }</span>
+<span class="nc" id="L45">    public void setAvailability(int availability) { this.availability = availability; }</span>
+
+<span class="nc" id="L47">    public String getEmail() { return email; }</span>
+    public void setEmail(String email) {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (Pattern.matches(&quot;^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$&quot;, email)) {</span>
+<span class="nc" id="L50">            this.email = email;</span>
+        } else {
+<span class="nc" id="L52">            throw new IllegalArgumentException(&quot;Email không hợp lệ&quot;);</span>
+        }
+<span class="nc" id="L54">    }</span>
+
+<span class="nc" id="L56">    public String getMobile() { return mobile; }</span>
+    public void setMobile(String mobile) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (Pattern.matches(&quot;\\(\\d{3}\\)-\\d{3}-\\d{4}&quot;, mobile)) {</span>
+<span class="nc" id="L59">            this.mobile = mobile;</span>
+        } else {
+<span class="nc" id="L61">            throw new IllegalArgumentException(&quot;Số điện thoại không hợp lệ, phải theo định dạng (000)-000-0000&quot;);</span>
+        }
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L67">        return &quot;Doctor [ID=&quot; + id + &quot;, Name=&quot; + name + &quot;, DateOfBirth=&quot; + dateOfBirth +</span>
+               &quot;, Specialization=&quot; + specialization + &quot;, Availability=&quot; + availability +
+               &quot;, Email=&quot; + email + &quot;, Mobile=&quot; + mobile + &quot;]&quot;;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
